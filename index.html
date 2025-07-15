@@ -8,44 +8,17 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f8f9fa;
-            padding-top: 2rem;
+        /* [Mantener los estilos anteriores] */
+        .feature-list {
+            text-align: left;
+            margin-top: 20px;
         }
-        .whatsapp-btn {
-            background-color: #25D366;
-            color: white;
+        .feature-list li {
+            margin-bottom: 8px;
         }
-        .whatsapp-btn:hover {
-            background-color: #128C7E;
-            color: white;
-        }
-        .install-btn {
-            background-color: #6c757d;
-            color: white;
-            margin-top: 10px;
-        }
-        .install-btn:hover {
-            background-color: #5a6268;
-            color: white;
-        }
-        .card {
-            max-width: 500px;
-            margin: 0 auto;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .phone-icon {
-            font-size: 2rem;
-            color: #25D366;
-        }
-        .country-code-hint {
-            font-size: 0.8rem;
-            color: #6c757d;
-            margin-top: -0.5rem;
-            margin-bottom: 1rem;
-        }
-        #installButtonContainer {
-            display: none; /* Oculto por defecto, se muestra si es instalable */
+        .app-description {
+            margin-bottom: 20px;
+            text-align: left;
         }
     </style>
 </head>
@@ -61,11 +34,20 @@
                 </div>
                 <h2 class="card-title mb-3">Enviar por WhatsApp</h2>
                 
+                <div class="app-description">
+                    <p>Esta aplicación te permite:</p>
+                    <ul class="feature-list">
+                        <li><strong>Compartir números de teléfono</strong> directamente a WhatsApp desde cualquier aplicación</li>
+                        <li><strong>Pegar números en cualquier formato</strong> (con espacios, guiones, código de país)</li>
+                        <li><strong>Envío rápido</strong> sin tener que copiar y pegar manualmente</li>
+                    </ul>
+                </div>
+                
                 <div id="normalView">
                     <div class="mb-3">
                         <input type="tel" class="form-control form-control-lg" id="phoneNumber" 
                                placeholder="Ej: 612 345 678, +34 612 345 678, 612-345-678">
-                        <div class="country-code-hint">Si no incluye código de país, se asumirá +34</div>
+                        <div class="country-code-hint">Si no incluye código de país, se asumirá +34 (España)</div>
                     </div>
                     <button class="btn whatsapp-btn btn-lg w-100" id="shareBtn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-1">
@@ -74,12 +56,21 @@
                         Abrir WhatsApp
                     </button>
                     
-                    <div id="installButtonContainer">
+                    <div id="installButtonContainer" class="mt-4">
+                        <div class="pwa-benefits mb-3">
+                            <h5>¿Por qué instalar la aplicación?</h5>
+                            <ul class="feature-list">
+                                <li>Aparecerá en tus opciones al compartir desde cualquier app</li>
+                                <li>Acceso rápido desde la pantalla de inicio</li>
+                                <li>Funciona sin conexión después de la instalación</li>
+                                <li>Sin anuncios ni permisos innecesarios</li>
+                            </ul>
+                        </div>
                         <button class="btn install-btn btn-lg w-100" id="installButton">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-1">
                                 <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v6h-2a.5.5 0 0 0-.354.854l2.5 2.5a.5.5 0 0 0 .708 0l2.5-2.5A.5.5 0 0 0 10.5 7.5h-2v-6z"/>
                             </svg>
-                            Instalar App
+                            Instalar Aplicación
                         </button>
                     </div>
                 </div>
