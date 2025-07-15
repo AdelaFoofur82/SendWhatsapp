@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compartir a WhatsApp</title>
+    <title>Enviar por WhatsApp</title>
     <link rel="manifest" href="manifest.json">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,6 +18,15 @@
         }
         .whatsapp-btn:hover {
             background-color: #128C7E;
+            color: white;
+        }
+        .install-btn {
+            background-color: #6c757d;
+            color: white;
+            margin-top: 10px;
+        }
+        .install-btn:hover {
+            background-color: #5a6268;
             color: white;
         }
         .card {
@@ -35,6 +44,9 @@
             margin-top: -0.5rem;
             margin-bottom: 1rem;
         }
+        #installButtonContainer {
+            display: none; /* Oculto por defecto, se muestra si es instalable */
+        }
     </style>
 </head>
 <body>
@@ -47,7 +59,7 @@
                         <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                     </svg>
                 </div>
-                <h2 class="card-title mb-3">Compartir a WhatsApp</h2>
+                <h2 class="card-title mb-3">Enviar por WhatsApp</h2>
                 
                 <div id="normalView">
                     <div class="mb-3">
@@ -61,6 +73,15 @@
                         </svg>
                         Abrir WhatsApp
                     </button>
+                    
+                    <div id="installButtonContainer">
+                        <button class="btn install-btn btn-lg w-100" id="installButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-1">
+                                <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v6h-2a.5.5 0 0 0-.354.854l2.5 2.5a.5.5 0 0 0 .708 0l2.5-2.5A.5.5 0 0 0 10.5 7.5h-2v-6z"/>
+                            </svg>
+                            Instalar App
+                        </button>
+                    </div>
                 </div>
                 
                 <div id="loadingView" class="d-none">
@@ -170,8 +191,52 @@
             }
         }
 
-        // Inicializar
-        window.addEventListener('DOMContentLoaded', processShare);
+        // Manejar la instalación de la PWA
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+        const installButtonContainer = document.getElementById('installButtonContainer');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Previene que el mini-infobar aparezca en mobile
+            e.preventDefault();
+            // Guarda el evento para que pueda ser activado más tarde
+            deferredPrompt = e;
+            // Muestra el botón de instalación
+            installButtonContainer.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            
+            // Muestra el prompt de instalación
+            deferredPrompt.prompt();
+            
+            // Espera a que el usuario responda al prompt
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            if (outcome === 'accepted') {
+                installButtonContainer.style.display = 'none';
+            }
+            
+            // Limpia la referencia
+            deferredPrompt = null;
+        });
+
+        // Ocultar el botón si la app ya está instalada
+        window.addEventListener('appinstalled', () => {
+            installButtonContainer.style.display = 'none';
+            deferredPrompt = null;
+        });
+
+        // Verificar si la app ya está instalada al cargar
+        window.addEventListener('DOMContentLoaded', () => {
+            processShare();
+            
+            // Verificar si está en modo standalone (ya instalada)
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                installButtonContainer.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
