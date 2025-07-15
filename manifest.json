@@ -2,25 +2,27 @@
     "name": "Enviar por WhatsApp",
     "short_name": "WhatsApp Direct",
     "description": "Envía números de teléfono directamente a WhatsApp",
-    "start_url": "https://adelafoofur82.github.io/SendWhatsapp/",
+    "start_url": "/SendWhatsapp/",
     "scope": "/SendWhatsapp/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#25D366",
     "icons": [
         {
-            "src": "https://adelafoofur82.github.io/SendWhatsapp/icon-192x192.png",
+            "src": "icon-192x192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
-            "src": "https://adelafoofur82.github.io/SendWhatsapp/icon-512x512.png",
+            "src": "icon-512x512.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         }
     ],
     "share_target": {
-        "action": "https://adelafoofur82.github.io/SendWhatsapp/",
+        "action": "/SendWhatsapp/",
         "method": "GET",
         "enctype": "application/x-www-form-urlencoded",
         "params": {
