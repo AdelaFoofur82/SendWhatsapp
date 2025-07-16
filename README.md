@@ -1,4 +1,4 @@
-# SendWhatsApp - PWA para compartir números directamente a WhatsApp
+# SendWhatsApp - PWA para enviar WhatsApp directamente sin añadir el número a tus contactos
 
 [![PWA](https://img.shields.io/badge/PWA-✓-blue.svg)](https://adelafoofur82.github.io/SendWhatsapp/)
 [![GitHub](https://img.shields.io/github/license/adelafoofur82/SendWhatsapp)](LICENSE)
