@@ -1,303 +1,373 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enviar por WhatsApp</title>
-    <link rel="manifest" href="manifest.json">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enviar WhatsApp</title>
+    <link rel="manifest" href="manifest.json" />
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <style>
-        body {
-    background-color: #f8f9fa;
-    padding-top: 2rem;
-}
-.whatsapp-btn {
-    background-color: #25D366 !important;
-    color: white !important;
-    border: none !important;
-}
-.whatsapp-btn:hover {
-    background-color: #128C7E !important;
-    color: white !important;
-}
-.install-btn {
-    background-color: #6c757d !important;
-    color: white !important;
-    margin-top: 10px;
-    border: none !important;
-}
-.install-btn:hover {
-    background-color: #5a6268 !important;
-    color: white !important;
-}
-.card {
-    max-width: 500px;
-    margin: 0 auto;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-.phone-icon {
-    font-size: 2rem;
-    color: #25D366;
-}
-.country-code-hint {
-    font-size: 0.8rem;
-    color: #6c757d;
-    margin-bottom: 1rem;
-}
-#installButtonContainer {
-    display: none; /* Oculto por defecto, se muestra si es instalable */
-}
-.feature-list {
-    text-align: left;
-    margin-top: 20px;
-    padding-left: 20px;
-}
-.feature-list li {
-    margin-bottom: 8px;
-}
-.app-description {
-    margin-bottom: 20px;
-    text-align: left;
-    background-color: #f0f8ff;
-    padding: 15px;
-    border-radius: 8px;
-}
-.pwa-benefits {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-        /* Añade esto a tu sección de estilos */
-.github-link {
-    transition: all 0.3s ease;
-}
-.github-link:hover {
-    transform: translateY(-2px);
-    opacity: 0.8;
-}
+      body {
+        background-color: #f8f9fa;
+        padding-top: 2rem;
+      }
+      .whatsapp-btn {
+        background-color: #25d366 !important;
+        color: white !important;
+        border: none !important;
+      }
+      .whatsapp-btn:hover {
+        background-color: #128c7e !important;
+        color: white !important;
+      }
+      .install-btn {
+        background-color: #6c757d !important;
+        color: white !important;
+        margin-top: 10px;
+        border: none !important;
+      }
+      .install-btn:hover {
+        background-color: #5a6268 !important;
+        color: white !important;
+      }
+      .card {
+        max-width: 500px;
+        margin: 0 auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .phone-icon {
+        font-size: 2rem;
+        color: #25d366;
+      }
+      .country-code-hint {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-bottom: 1rem;
+      }
+      #installButtonContainer {
+       display: none; /* Oculto por defecto, se muestra si es instalable */
+      }
+      .feature-list {
+        text-align: left;
+        margin-top: 20px;
+        padding-left: 20px;
+      }
+      .feature-list li {
+        margin-bottom: 8px;
+      }
+      .app-description {
+        margin-bottom: 20px;
+        text-align: left;
+        background-color: #f0f8ff;
+        padding: 15px;
+        border-radius: 8px;
+      }
+      .pwa-benefits {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+      }
+      /* Añade esto a tu sección de estilos */
+      .github-link {
+        transition: all 0.3s ease;
+      }
+      .github-link:hover {
+        transform: translateY(-2px);
+        opacity: 0.8;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="card" id="appContainer">
-            <div class="card-body text-center p-4">
-                <div class="phone-icon mb-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
-                        <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                    </svg>
-                </div>
-                <h2 class="card-title mb-3">Enviar por WhatsApp</h2>
-                
-                <div class="app-description">
-                    <p>Esta aplicación te permite:</p>
-                    <ul class="feature-list">
-                        <li><strong>Envía un mensaje de WhatsApp</strong> directamente sin tener que añadir el número a tus contactos desde cualquier aplicación</li>
-                        <li><strong>Pegar números en cualquier formato</strong> (con espacios, guiones, código de país)</li>
-                        <li><strong>Envío rápido</strong> sin tener que copiar y pegar manualmente</li>
-                    </ul>
-                </div>
-                
-                <div id="normalView">
-                    <div class="mb-3">
-                        <input type="tel" class="form-control form-control-lg" id="phoneNumber" 
-                               placeholder="Ej: 612 345 678, +34 612 345 678, 612-345-678">
-                        <div class="country-code-hint">Si no incluye código de país, se asumirá +34 (España)</div>
-                    </div>
-                    <button class="btn whatsapp-btn btn-lg w-100" id="shareBtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-1">
-                            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-                        </svg>
-                        Abrir WhatsApp
-                    </button>
-                    
-                    <div id="installButtonContainer" class="mt-4">
-                        <div class="pwa-benefits mb-3">
-                            <h5>¿Por qué instalar la aplicación?</h5>
-                            <ul class="feature-list">
-                                <li>Aparecerá en tus opciones al compartir desde cualquier app</li>
-                                <li>Acceso rápido desde la pantalla de inicio</li>
-                                <li>Funciona sin conexión después de la instalación</li>
-                                <li>Sin anuncios ni permisos innecesarios</li>
-                            </ul>
-                        </div>
-                        <button class="btn install-btn btn-lg w-100" id="installButton">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-1">
-                                <path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v6h-2a.5.5 0 0 0-.354.854l2.5 2.5a.5.5 0 0 0 .708 0l2.5-2.5A.5.5 0 0 0 10.5 7.5h-2v-6z"/>
-                            </svg>
-                            Instalar Aplicación
-                        </button>
-                    </div>
-                </div>
-                
-                <div id="loadingView" class="d-none">
-                    <div class="spinner-border text-success" role="status">
-                        <span class="visually-hidden">Cargando...</span>
-                    </div>
-                    <p class="mt-3">Redirigiendo a WhatsApp...</p>
-                </div>
+      <div class="card" id="appContainer">
+        <div class="card-body text-center p-4">
+          <div class="phone-icon mb-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"
+              />
+              <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+            </svg>
+          </div>
+          <h2 class="card-title mb-3">Enviar WhatsApp</h2>
+
+          <div class="app-description">
+            <p>Esta aplicación te permite:</p>
+            <ul class="feature-list">
+              <li>
+                <strong>Envíar un mensaje de WhatsApp</strong> directamente sin
+                tener que añadir el número a tus contactos desde cualquier
+                aplicación
+              </li>
+              <li>
+                <strong>Pegar números en cualquier formato</strong> (con
+                espacios, guiones, código de país)
+              </li>
+              <li>
+                <strong>Envío rápido</strong> sin tener que copiar y pegar
+                manualmente
+              </li>
+            </ul>
+          </div>
+
+          <div id="normalView">
+            <div class="mb-3">
+              <input
+                type="tel"
+                class="form-control form-control-lg"
+                id="phoneNumber"
+                placeholder="Ej: 612 345 678, +34 612 345 678, 612-345-678"
+              />
+              <div class="country-code-hint">
+                Si no incluye código de país, se asumirá +34 (España)
+              </div>
             </div>
+            <button class="btn whatsapp-btn btn-lg w-100" id="shareBtn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                class="me-1"
+              >
+                <path
+                  d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"
+                />
+              </svg>
+              Abrir WhatsApp
+            </button>
+
+            <div id="loadingView" class="d-none">
+              <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Cargando...</span>
+              </div>
+              <p class="mt-3">Redirigiendo a WhatsApp...</p>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="card mt-4" id="installButtonContainer">
+        <div class="card-body text-center p-4">
+          <div class="mt-4">
+            <div class="pwa-benefits mb-3">
+              <h5>¿Por qué instalar la aplicación?</h5>
+              <ul class="feature-list">
+                <li>
+                  Aparecerá en tus opciones al compartir desde cualquier app
+                </li>
+                <li>Acceso rápido desde la pantalla de inicio</li>
+                <li>Sin anuncios ni permisos innecesarios</li>
+              </ul>
+            </div>
+            <button class="btn install-btn btn-lg w-100" id="installButton">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                class="me-1"
+              >
+                <path
+                  d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v6h-2a.5.5 0 0 0-.354.854l2.5 2.5a.5.5 0 0 0 .708 0l2.5-2.5A.5.5 0 0 0 10.5 7.5h-2v-6z"
+                />
+              </svg>
+              Instalar Aplicación
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Añade esto antes del cierre del </body> -->
-<footer class="text-center mt-4 mb-3">
-    <a href="https://github.com/adelafoofur82/SendWhatsapp" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       class="text-decoration-none">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="me-1">
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+    <footer class="text-center mt-4 mb-3">
+      <a
+        href="https://github.com/adelafoofur82/SendWhatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-decoration-none"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+          class="me-1"
+        >
+          <path
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+          />
         </svg>
         Ver código fuente en GitHub
-    </a>
-</footer>
+      </a>
+    </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
-        // Normaliza el número de teléfono según los requisitos
-        function normalizePhoneNumber(input) {
-            // Eliminar todo excepto dígitos y el signo +
-            let cleanNumber = input.replace(/[^\d+]/g, '');
-            
-            // Si empieza con +, mantener el código de país
-            if (cleanNumber.startsWith('+')) {
-                // Eliminar el + para el procesamiento
-                cleanNumber = cleanNumber.substring(1);
-                
-                // Verificar si ya tiene código de país (entre 1-3 dígitos)
-                const countryCodeMatch = cleanNumber.match(/^(\d{1,3})/);
-                if (countryCodeMatch) {
-                    const countryCode = countryCodeMatch[1];
-                    const numberWithoutCode = cleanNumber.substring(countryCode.length);
-                    
-                    // Devolver número con código internacional (sin +)
-                    return countryCode + numberWithoutCode;
-                }
-            }
-            
-            // Si no tiene código de país, asumir España (34)
-            // Primero verificar si el número empieza con 0 (quitarlo)
-            if (cleanNumber.startsWith('0')) {
-                cleanNumber = cleanNumber.substring(1);
-            }
-            
-            // Si el número tiene 9 dígitos (sin contar código), añadir 34
-            if (cleanNumber.length === 9) {
-                return '34' + cleanNumber;
-            }
-            
-            // Si ya tiene 11 dígitos (34 + 9), asumir que ya está bien
-            if (cleanNumber.length === 11 && cleanNumber.startsWith('34')) {
-                return cleanNumber;
-            }
-            
-            // Para otros casos (números cortos o con formato desconocido), devolver tal cual
-            return cleanNumber;
+      // Normaliza el número de teléfono según los requisitos
+      function normalizePhoneNumber(input) {
+        // Eliminar todo excepto dígitos y el signo +, también los puntos .
+        let cleanNumber = input
+          .replace(/[^0-9+]/g, "")
+          .replace(/\.+/g, ""); // Eliminar puntos
+
+        // Si empieza con +, mantener el código de país
+        if (cleanNumber.startsWith("+")) {
+          // Eliminar el + para el procesamiento
+          cleanNumber = cleanNumber.substring(1);
+
+          // Verificar si ya tiene código de país (entre 1-3 dígitos)
+          const countryCodeMatch = cleanNumber.match(/^(\d{1,3})/);
+          if (countryCodeMatch) {
+            const countryCode = countryCodeMatch[1];
+            const numberWithoutCode = cleanNumber.substring(countryCode.length);
+
+            // Devolver número con código internacional (sin +)
+            return countryCode + numberWithoutCode;
+          }
         }
 
-        // Extrae y normaliza número de teléfono del texto compartido
-        function extractPhoneNumber(text) {
-            if (!text) return null;
-            
-            // Encontrar cualquier número de teléfono en el texto
-            const phoneRegex = /[\+]?[\s\d\-\(\)]{7,}/;
-            const match = text.match(phoneRegex);
-            
-            if (!match) return null;
-            
-            return normalizePhoneNumber(match[0]);
+        // Si no tiene código de país, asumir España (34)
+        // Primero verificar si el número empieza con 0 (quitarlo)
+        if (cleanNumber.startsWith("0")) {
+          cleanNumber = cleanNumber.substring(1);
         }
 
-        // Abrir WhatsApp con el número
-        function openWhatsApp(phoneNumber) {
-            if (!phoneNumber) {
-                alert('No se pudo detectar un número de teléfono válido');
-                return;
-            }
-            
-            // Mostrar vista de carga
-            document.getElementById('normalView').classList.add('d-none');
-            document.getElementById('loadingView').classList.remove('d-none');
-            
-            // Redirigir a WhatsApp
-            window.location.href = `https://wa.me/${phoneNumber}`;
+        // Si el número tiene 9 dígitos (sin contar código), añadir 34
+        if (cleanNumber.length === 9) {
+          return "34" + cleanNumber;
         }
 
-        // Manejar el botón
-        document.getElementById('shareBtn').addEventListener('click', function() {
-            const phoneInput = document.getElementById('phoneNumber').value.trim();
-            
-            if (!phoneInput) {
-                alert('Por favor ingresa un número de teléfono');
-                return;
-            }
-            
-            const phoneNumber = normalizePhoneNumber(phoneInput);
-            openWhatsApp(phoneNumber);
-        });
-
-        // Procesar datos compartidos al cargar
-        function processShare() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const sharedText = urlParams.get('text');
-            const phoneNumber = extractPhoneNumber(sharedText);
-            
-            if (phoneNumber) {
-                openWhatsApp(phoneNumber);
-            }
+        // Si ya tiene 11 dígitos (34 + 9), asumir que ya está bien
+        if (cleanNumber.length === 11 && cleanNumber.startsWith("34")) {
+          return cleanNumber;
         }
 
-        // Manejar la instalación de la PWA
-        let deferredPrompt;
-        const installButton = document.getElementById('installButton');
-        const installButtonContainer = document.getElementById('installButtonContainer');
+        // Para otros casos (números cortos o con formato desconocido), devolver tal cual
+        return cleanNumber;
+      }
 
-        window.addEventListener('beforeinstallprompt', (e) => {
-            // Previene que el mini-infobar aparezca en mobile
-            e.preventDefault();
-            // Guarda el evento para que pueda ser activado más tarde
-            deferredPrompt = e;
-            // Muestra el botón de instalación
-            installButtonContainer.style.display = 'block';
+      // Extrae y normaliza número de teléfono del texto compartido
+      function extractPhoneNumber(text) {
+        if (!text) return null;
+
+        // Encontrar cualquier número de teléfono en el texto
+        const phoneRegex = /[\+]?[\s\d\-\(\)]{7,}/;
+        const match = text.match(phoneRegex);
+
+        if (!match) return null;
+
+        return normalizePhoneNumber(match[0]);
+      }
+
+      // Abrir WhatsApp con el número
+      function openWhatsApp(phoneNumber) {
+        if (!phoneNumber) {
+          alert("No se pudo detectar un número de teléfono válido");
+          return;
+        }
+
+        // Mostrar vista de carga
+        document.getElementById("normalView").classList.add("d-none");
+        document.getElementById("loadingView").classList.remove("d-none");
+
+        // Redirigir a WhatsApp
+        window.location.href = `https://wa.me/${phoneNumber}`;
+      }
+
+      // Manejar el botón
+      document
+        .getElementById("shareBtn")
+        .addEventListener("click", function () {
+          const phoneInput = document
+            .getElementById("phoneNumber")
+            .value.trim();
+
+          if (!phoneInput) {
+            alert("Por favor ingresa un número de teléfono");
+            return;
+          }
+
+          const phoneNumber = normalizePhoneNumber(phoneInput);
+          openWhatsApp(phoneNumber);
         });
 
-        installButton.addEventListener('click', async () => {
-            if (!deferredPrompt) return;
-            
-            // Muestra el prompt de instalación
-            deferredPrompt.prompt();
-            
-            // Espera a que el usuario responda al prompt
-            const { outcome } = await deferredPrompt.userChoice;
-            
-            if (outcome === 'accepted') {
-                installButtonContainer.style.display = 'none';
-            }
-            
-            // Limpia la referencia
-            deferredPrompt = null;
-        });
+      // Procesar datos compartidos al cargar
+      function processShare() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const sharedText = urlParams.get("text");
+        const phoneNumber = extractPhoneNumber(sharedText);
+        const phoneInputElement = document.getElementById("phoneNumber");
+        phoneInputElement.value = phoneNumber || "";
 
-        // Ocultar el botón si la app ya está instalada
-        window.addEventListener('appinstalled', () => {
-            installButtonContainer.style.display = 'none';
-            deferredPrompt = null;
-        });
+        if (phoneNumber) {
+          openWhatsApp(phoneNumber);
+        }
+      }
 
-        // Verificar si la app ya está instalada al cargar
-        window.addEventListener('DOMContentLoaded', () => {
-            processShare();
-            
-            // Verificar si está en modo standalone (ya instalada)
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                installButtonContainer.style.display = 'none';
-            }
-        });
+      // Manejar la instalación de la PWA
+      let deferredPrompt;
+      const installButton = document.getElementById("installButton");
+      const installButtonContainer = document.getElementById(
+        "installButtonContainer"
+      );
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+        // Previene que el mini-infobar aparezca en mobile
+        e.preventDefault();
+        // Guarda el evento para que pueda ser activado más tarde
+        deferredPrompt = e;
+        // Muestra el botón de instalación
+        installButtonContainer.style.display = "block";
+      });
+
+      installButton.addEventListener("click", async () => {
+        if (!deferredPrompt) return;
+
+        // Muestra el prompt de instalación
+        deferredPrompt.prompt();
+
+        // Espera a que el usuario responda al prompt
+        const { outcome } = await deferredPrompt.userChoice;
+
+        if (outcome === "accepted") {
+          installButtonContainer.style.display = "none";
+        }
+
+        // Limpia la referencia
+        deferredPrompt = null;
+      });
+
+      // Ocultar el botón si la app ya está instalada
+      window.addEventListener("appinstalled", () => {
+        installButtonContainer.style.display = "none";
+        deferredPrompt = null;
+      });
+
+      // Verificar si la app ya está instalada al cargar
+      window.addEventListener("DOMContentLoaded", () => {
+        processShare();
+
+        // Verificar si está en modo standalone (ya instalada)
+        if (window.matchMedia("(display-mode: standalone)").matches) {
+          installButtonContainer.style.display = "none";
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
