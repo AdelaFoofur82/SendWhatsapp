@@ -1,7 +1,7 @@
 {
     "name": "Enviar por WhatsApp",
-    "short_name": "WhatsApp Direct",
-    "description": "Envía números de teléfono directamente a WhatsApp",
+    "short_name": "SendWhatsApp",
+    "description": "Envía WhatsApp a números de teléfono directamente sin añadirlos a tus contactos",
     "start_url": "/SendWhatsapp/",
     "scope": "/SendWhatsapp/",
     "display": "standalone",
