@@ -262,19 +262,6 @@
         return cleanNumber;
       }
 
-      // Extrae y normaliza número de teléfono del texto compartido
-      function extractPhoneNumber(text) {
-        if (!text) return null;
-
-        // Encontrar cualquier número de teléfono en el texto
-        const phoneRegex = /[\+]?[\s\d\-\(\)]{7,}/;
-        const match = text.match(phoneRegex);
-
-        if (!match) return null;
-
-        return normalizePhoneNumber(match[0]);
-      }
-
       // Abrir WhatsApp con el número
       function openWhatsApp(phoneNumber) {
         if (!phoneNumber) {
@@ -311,7 +298,7 @@
       function processShare() {
         const urlParams = new URLSearchParams(window.location.search);
         const sharedText = urlParams.get("text");
-        const phoneNumber = extractPhoneNumber(sharedText);
+        const phoneNumber = normalizePhoneNumber(sharedText);
         const phoneInputElement = document.getElementById("phoneNumber");
         phoneInputElement.value = phoneNumber || "";
 
